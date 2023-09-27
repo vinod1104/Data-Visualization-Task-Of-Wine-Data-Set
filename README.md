@@ -19,7 +19,7 @@ The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
 The below link is the output of task.\
-![Output of my task ](output.png).
+![Output of my task ](public/output.png).
 
 ### `npm test`
 
