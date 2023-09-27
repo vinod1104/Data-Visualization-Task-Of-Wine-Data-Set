@@ -1,0 +1,62 @@
+body {
+
+  font-family: "Open Sans", sans-serif;
+  line-height: 1.25;
+  justify-content: center;
+  display: flex;
+}
+
+table {
+
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  padding: 0;
+  margin: auto;
+  width: 100%;
+  cursor: pointer;
+
+}
+
+table:hover {
+  width: 150%;
+}
+
+caption {
+
+  font-size: 32px;
+  margin-bottom: 8px;
+  margin-top: 34px;
+  justify-content: center;
+  display: flex;
+}
+
+table tr {
+  background: #f8f8f8;
+  border: 1px solid #ccc;
+  padding: 3px;
+}
+
+table th,
+table td {
+  padding: 6px;
+  text-align: center;
+  border: 1px solid #ccc;
+  font-size: 12px;
+}
+
+table td:hover {
+  color: #7433FF;
+}
+
+table th {
+  font-size: 16px;
+  letter-spacing: 1px;
+  background-color: #9babc4
+}
+
+h2 {
+  text-decoration: underline;
+  justify-content: center;
+  display: flex;
+  color: #3352FF;
+}
