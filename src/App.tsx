@@ -4,6 +4,7 @@ const App = () => {
   //To calculate the class-wise mean, median, mode of “Flavanoids” for the entire dataset.
 
   const flavanoidsData = (totalData: any[], alcoholNum: number) => {
+
     const filterData = totalData.filter((item: { Alcohol: number; }) => item.Alcohol === alcoholNum);
     const fladData = filterData.map(item => parseFloat(item.Flavanoids));
 
@@ -11,23 +12,29 @@ const App = () => {
     const mean = fladData.reduce((sum, value) => sum + value, 0) / fladData.length;
 
     // Calculate median
-    fladData.sort((a: any, b: any) => a.Flavanoids - b.Flavanoids);
+    fladData.sort((a: any, b: any) => a - b);
     const middle = Math.floor(fladData.length / 2);
     const median = fladData.length % 2 === 0 ? (fladData[middle - 1] + fladData[middle]) / 2 : fladData[middle];
+
     // Calculate mode
     const counts: any = {};
-    let mode = null;
+    let arr: any = [];
     let maxCount = 0;
-
-    fladData.forEach((value: any | number) => {
-      counts[value] = (counts[value] || 0) + 1;
-      if (counts[value] > maxCount) {
-        mode = value;
-        maxCount = counts[value];
+    fladData.forEach((value: number) => {
+      const fixedValue = value.toFixed(3)
+      counts[fixedValue] = (counts[fixedValue] || 0) + 1;
+      if (counts[fixedValue] > maxCount) {
+        arr = [fixedValue];
+        maxCount = counts[fixedValue];
+      } else if (counts[fixedValue] === maxCount) {
+        arr.push([fixedValue]);
       }
     });
+    let mode = [];
+    mode = arr.join(",")
     return { mean, median, mode };
   };
+
   const flavanoids1: any = flavanoidsData(wineData.Items, 1);
   const flavanoids2: any = flavanoidsData(wineData.Items, 2);
   const flavanoids3: any = flavanoidsData(wineData.Items, 3);
@@ -47,25 +54,30 @@ const App = () => {
     const mean = gammaFlad.reduce((sum, value) => sum + value, 0) / gammaFlad.length;
 
     // Calculate median
-    gammaFlad.sort((a: any, b: any) => a.Gamma - b.Gamma);
+    gammaFlad.sort((a: any, b: any) => a - b);
     const middle = Math.floor(filterData.length / 2);
     const median =
-      gammaFlad.length % 2 === 0 ? (gammaFlad[middle - 1] + gammaFlad[middle]) / 2
-        : gammaFlad[middle];
+      gammaFlad.length % 2 === 0 ? (gammaFlad[middle - 1] + gammaFlad[middle]) / 2 : gammaFlad[middle];
 
     // Calculate mode
     const counts: any = {};
-    let mode = null;
+    let arr: any = [];
     let maxCount = 0;
-    gammaFlad.forEach((value: string | number) => {
-      counts[value] = (counts[value] || 0) + 1;
-      if (counts[value] > maxCount) {
-        mode = value;
-        maxCount = counts[value];
+    gammaFlad.forEach((value: number) => {
+      const fixedValue = value.toFixed(3)
+      counts[fixedValue] = (counts[fixedValue] || 0) + 1;
+      if (counts[fixedValue] > maxCount) {
+        arr = [fixedValue];
+        maxCount = counts[fixedValue];
+      } else if (counts[fixedValue] === maxCount) {
+        arr.push([fixedValue]);
       }
     });
+    let mode = [];
+    mode = arr.join(",")
     return { mean, median, mode };
   };
+
   const gammaStats1: any = gammaData(wineData.Items, 1);
   const gammaStats2: any = gammaData(wineData.Items, 2);
   const gammaStats3: any = gammaData(wineData.Items, 3);
@@ -98,9 +110,9 @@ const App = () => {
           </tr>
           <tr>
             <td>Flavanoids Mode</td>
-            <td>{flavanoids1.mode.toFixed(3)}</td>
-            <td>{flavanoids2.mode.toFixed(3)}</td>
-            <td>{flavanoids3.mode.toFixed(3)}</td>
+            <td>{flavanoids1.mode}</td>
+            <td>{flavanoids2.mode}</td>
+            <td>{flavanoids3.mode}</td>
           </tr>
 
         </tbody>
@@ -130,9 +142,9 @@ const App = () => {
             </tr>
             <tr>
               <td>Gamma Mode</td>
-              <td>{gammaStats1.mode.toFixed(3)}</td>
-              <td>{gammaStats2.mode.toFixed(3)}</td>
-              <td>{gammaStats3.mode.toFixed(3)}</td>
+              <td>{gammaStats1.mode}</td>
+              <td>{gammaStats2.mode}</td>
+              <td>{gammaStats3.mode}</td>
             </tr>
 
           </tbody>
